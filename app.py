@@ -29,8 +29,9 @@ async def session_middleware(request: web.Request,
 async def app_context(app: web.Application):
     async with engine.begin() as conn:
         async with Session() as session:
-            await session.execute('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
+            # await session.execute('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
             await session.commit()
+            print('session.commit()')
         await conn.run_sync(Base.metadata.create_all)
     print('START')
     yield
@@ -53,17 +54,23 @@ async def get_orm_item(orm_class, object_id, session):
                           f'{orm_class.__name__} not found')
     return item
 
+class TestView(web.View):
+
+    async def get(self):
+
+        print('UserView.get')
+
+        return web.json_response({
+            'class': 'TestView',
+            'method': 'get'
+        })
 
 app = web.Application(middlewares=[session_middleware, ])
 app._cleanup_ctx.append(app_context)
 
 app.add_routes([
-    web.get('/user/{user_id:\d+}', UserView),
-    # web.post("/login", login),
-    # web.post('/users/', UsersView),
-    # web.get('/users/{user_id:\d+}', UsersView),
-    # web.patch('/users/{user_id:\d+}', UsersView),
-    # web.delete('/users/{user_id:\d+}', UsersView),
+    # web.get('/user/<int:user_id>', UserView),
+    web.get('/users/{user_id:\d+}', TestView),
 ])
 
 # app.add_url_rule('/user/<int:user_id>', view_func=UserView.as_view('users_get'), methods=['GET', 'PATCH', 'DELETE'])

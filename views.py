@@ -3,7 +3,9 @@ from aiohttp import web
 
 class UserView(web.View):
 
-    def get(self, user_id: int):
+    async def get(self, user_id: int):
+
+        print('UserView.get')
 
         # with Session() as session:
         #     user = get_by_id(user_id, UserModel, session)
@@ -21,7 +23,7 @@ class UserView(web.View):
             'method': 'get'
         })
 
-    def post(self):
+    async def post(self):
         # json_data = request.json
         # with Session() as session:
         #     try:
@@ -36,7 +38,7 @@ class UserView(web.View):
             'method': 'post'
         })
 
-    def patch(self, user_id: int):
+    async def patch(self, user_id: int):
         # data_to_patch = validate(request.json, PatchUserSchema)
         #
         # with Session() as session:
@@ -51,7 +53,7 @@ class UserView(web.View):
             'method': 'patch'
         })
 
-    def delete(self, user_id: int):
+    async def delete(self, user_id: int):
         # with Session() as session:
         #     user = get_by_id(user_id, UserModel, session)
         #     session.delete(user)
@@ -64,7 +66,7 @@ class UserView(web.View):
 
     class AdvView(web.View):
 
-        def get(self, adv_id: int):
+        async def get(self, adv_id: int):
             # with Session() as session:
             #     adv = get_by_id(adv_id, AdvModel, session)
             #
@@ -80,7 +82,7 @@ class UserView(web.View):
                 'method': 'get'
             })
 
-        def post(self):
+        async def post(self):
             # json_data = request.json
             # with Session() as session:
             #     try:
@@ -97,7 +99,7 @@ class UserView(web.View):
                 'method': 'post'
             })
 
-        def patch(self, adv_id: int):
+        async def patch(self, adv_id: int):
             # data_to_patch = validate(request.json, PatchAdvSchema)
             # json_data = request.json
             # with Session() as session:
@@ -117,7 +119,7 @@ class UserView(web.View):
                 'method': 'patch'
             })
 
-        def delete(self, adv_id: int):
+        async def delete(self, adv_id: int):
             #         json_data = request.json
             #         with Session() as session:
             #             user_id = get_user_id(json_data, UserModel, session)

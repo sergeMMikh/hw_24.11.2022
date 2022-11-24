@@ -7,7 +7,7 @@ attrs
 bcrypt
 Brotli
 cffi
-charset-normalizer==3.0.1
+charset-normalizer
 frozenlist
 greenlet
 gunicorn

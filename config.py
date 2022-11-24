@@ -1,7 +1,5 @@
 import os
 
-TOKEN_TTL = int(os.getenv("TOKEN_TTL", 60 * 60 * 24))
-
 PG_USER = os.getenv("PG_USER", "app")
 PG_PASSWORD = os.getenv("PG_PASSWORD", "1234")
 PG_HOST = os.getenv("PG_HOST", "localhost")
