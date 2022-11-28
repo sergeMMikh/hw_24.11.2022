@@ -7,6 +7,8 @@ from sqlalchemy.orm import sessionmaker
 
 from config import PG_DSN
 
+print(f'PG_DSN: {PG_DSN}')
+
 Base = declarative_base()
 
 engine = create_async_engine(PG_DSN)

@@ -31,8 +31,11 @@ def basic_request(method: Literal['get', 'post', 'patch', 'delete'], path: str, 
     return response.json()
 
 
-def create_user(name: str, password: str):
-    return basic_request('post', 'users/', json={'name': name, 'password': password})
+def create_user(name: str, password: str, email: str):
+    return basic_request('post', 'users/', json={'name': name,
+                                                 'password': password,
+                                                 # 'email': email
+                                                 })
 
 
 def get_user(user_id):
