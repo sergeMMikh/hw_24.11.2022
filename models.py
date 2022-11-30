@@ -12,7 +12,7 @@ class User(Base):
     name = Column(String(100), nullable=False, unique=True)
     password = Column(String(255), nullable=False)
     creation_time = Column(DateTime, server_default=func.now())
-    # email = Column(String(100), nullable=False, unique=True)
+    email = Column(String(100), nullable=False, unique=True)
     # advertisement = relationship("AdvModel", backref="user")
 
 

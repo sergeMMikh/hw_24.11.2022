@@ -15,7 +15,7 @@ def test_root():
 def test_create_user():
     new_user = api.create_user(name='some_new_user',
                                password=PASSWORD,
-                               email='email@myilo.com'
+                               email='email@mmail.com'
                                )
 
     assert 'id' in new_user

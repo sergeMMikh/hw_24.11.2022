@@ -8,6 +8,7 @@ from auth import hash_password, check_password
 from config import TOKEN_TTL
 from models import Base, User, Token
 from engine_session_middle import engine, Session
+from pprint import pprint
 
 
 async def app_context(app: web.Application):
@@ -86,6 +87,10 @@ class UsersView(web.View):
 
     async def post(self):
         user_data = await self.request.json()
+
+        print('user_data:')
+        pprint(user_data)
+
         user_data['password'] = hash_password(user_data['password'])
         new_user = User(**user_data)
         self.request['session'].add(new_user)
