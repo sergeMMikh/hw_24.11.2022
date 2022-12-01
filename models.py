@@ -13,7 +13,7 @@ class User(Base):
     password = Column(String(255), nullable=False)
     creation_time = Column(DateTime, server_default=func.now())
     email = Column(String(100), nullable=False, unique=True)
-    # advertisement = relationship("AdvModel", backref="user")
+    advertisement = relationship("AdvModel", backref="user")
 
 
 class Token(Base):

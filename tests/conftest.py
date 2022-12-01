@@ -1,7 +1,8 @@
 import pytest
 import time
+
+from config import PG_USER, PG_PASSWORD, PG_HOST, PG_PORT, PG_DB
 from models import Base, User
-from config import PG_HOST, PG_USER, PG_DB, PG_PORT, PG_PASSWORD
 from auth import hash_password
 
 from sqlalchemy import create_engine
@@ -37,8 +38,14 @@ def root_user():
 @pytest.fixture()
 def new_user():
     with Session() as session:
-        new_user = User(name=f'new_user_{time.time()}', password=hash_password('1234'), email='new_user@mmail.com')
-        session.add(new_user)
+        time.sleep(0.001)
+        new_user = User(name=f'new_user_{time.time()}',
+                        password=hash_password('1234'),
+                        email=f'{time.time()}@mmail.com')
+        try:
+            session.add(new_user)
+        except:
+            session.rollback()
         session.commit()
         return {
             'id': new_user.id,

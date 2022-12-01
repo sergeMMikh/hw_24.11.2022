@@ -53,7 +53,7 @@ def test_patch_user_non_existed(new_user):
 
 def test_delete_user(new_user):
     token = api.login(new_user['name'], new_user['password'])['token']
-    response = api.delete_user(new_user['id'], token= token)
+    response = api.delete_user(new_user['id'], token=token)
     assert response == {"status": "success"}
 
     with pytest.raises(api.ApiError) as err_info:
