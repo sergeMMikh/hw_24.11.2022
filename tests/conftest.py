@@ -71,4 +71,3 @@ def new_adv(new_user):
             'description': new_adv.description,
             'token': token
         }
-

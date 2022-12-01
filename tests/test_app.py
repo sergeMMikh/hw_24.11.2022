@@ -97,3 +97,4 @@ def test_get_advertisement(new_adv):
 
 
 
+
