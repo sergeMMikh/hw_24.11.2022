@@ -85,6 +85,14 @@ def test_create_get_advertisement(new_user):
     assert adv_data['Title'] == title
 
 
+def test_get_advertisement(new_adv):
+    print(f"new_adv['title']: {new_adv['title']}")
+    adv_data = api.get_adv(new_adv['id'])
+
+    assert adv_data['Title'] == new_adv['title']
+
+
+
 
 
 
