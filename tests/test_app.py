@@ -67,6 +67,25 @@ def test_delete_user(new_user):
 def test_login(new_user):
     token = api.login(new_user['name'], new_user['password'])['token']
 
-    print(f'token: {token}')
+    return token
 
-    # assert token is not None
+
+def test_create_get_advertisement(new_user):
+    token = test_login(new_user)
+    title = 'New title!'
+    new_adv = api.create_adv(token=token,
+                             title=title,
+                             description='This is a new tittle description.'
+                             )
+
+    assert 'id' in new_adv
+
+    adv_data = api.get_adv(new_adv.get("id"))
+
+    assert adv_data['Title'] == title
+
+
+
+
+
+

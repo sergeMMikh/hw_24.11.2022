@@ -14,7 +14,10 @@ class ApiError(Exception):
         self.message = message
 
 
-def basic_request(method: Literal['get', 'post', 'patch', 'delete'], path: str, **kwargs) -> dict:
+def basic_request(method: Literal['get', 'post', 'patch', 'delete'],
+                  path: str,
+                  **kwargs) -> dict:
+
     method = getattr(session, method)
 
     path = f'{API_URL}/{path}'
@@ -32,10 +35,12 @@ def basic_request(method: Literal['get', 'post', 'patch', 'delete'], path: str, 
 
 
 def create_user(name: str, password: str, email: str):
-    return basic_request('post', 'users/', json={'name': name,
-                                                 'password': password,
-                                                 'email': email
-                                                 })
+    return basic_request('post',
+                         'users/',
+                         json={'name': name,
+                               'password': password,
+                               'email': email
+                               })
 
 
 def get_user(user_id):
@@ -43,13 +48,32 @@ def get_user(user_id):
 
 
 def patch_user(user_id: int, patch: dict):
-    return basic_request('patch', f'users/{user_id}', json=patch)
+    return basic_request('patch',
+                         f'users/{user_id}',
+                         json=patch)
 
 
 def delete_user(user_id: int, token: str):
-
-    return basic_request('delete', f'users/{user_id}', headers={'token': token})
+    return basic_request('delete',
+                         f'users/{user_id}',
+                         headers={'token': token})
 
 
 def login(name: str, password: str):
-    return basic_request('post', 'login', json={'name': name, 'password': password})
+    return basic_request('post', 'login',
+                         json={'name': name,
+                               'password': password})
+
+
+def create_adv(token: str, title: str, description: str):
+    return basic_request('post', 'adv',
+                         headers={'token': token},
+                         json={
+                             'title': title,
+                             'description': description
+                         })
+
+
+def get_adv(adv_id):
+    return basic_request('get',
+                         f'adv/{adv_id}')

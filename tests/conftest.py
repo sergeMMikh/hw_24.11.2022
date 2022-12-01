@@ -24,7 +24,9 @@ def cleanup_database():
 @pytest.fixture(scope='session')
 def root_user():
     with Session() as session:
-        new_user = User(name='root', password=hash_password('toor'), email='toor@mmail.com')
+        new_user = User(name='root',
+                        password=hash_password('toor'),
+                        email='toor@mmail.com')
         session.add(new_user)
         session.commit()
         return {
