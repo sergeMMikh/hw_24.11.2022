@@ -1,4 +1,3 @@
-from pprint import pprint
 from aiohttp import web
 from auth import hash_password
 from models import User

@@ -87,6 +87,7 @@ print('requests:')
 pprint(data.text)
 
 print('\n___adv_delete_____\n')
+
 print(f'adv_id: {adv_id}')
 data = requests.delete(f'http://127.0.0.1:8080/adv/{adv_id}',
                        headers={'token': token})

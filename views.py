@@ -4,11 +4,10 @@ import json
 from aiohttp import web
 from sqlalchemy.future import select
 
-from auth import hash_password, check_password
+from auth import check_password
 from config import TOKEN_TTL
-from models import Base, User, Token, AdvModel
+from models import Base, User, Token
 from engine_session_middle import engine, Session
-from pprint import pprint
 
 
 async def app_context(app: web.Application):

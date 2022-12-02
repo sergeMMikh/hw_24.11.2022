@@ -1,8 +1,8 @@
 from aiohttp import web
 
-from adv_views import AdvView
 from engine_session_middle import session_middleware
-from users_views import UsersView
+from views_users import UsersView
+from views_adv import AdvView
 from views import login, app_context
 
 app = web.Application(middlewares=[session_middleware, ])

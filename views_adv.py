@@ -20,11 +20,8 @@ class AdvView(web.View):
         await check_auth(self.request)
 
         user_id = await get_user(self.request)
-
-
         adv_data = dict(await self.request.json())
         adv_data.update({'user_id': user_id})
-
         new_adv = AdvModel(**adv_data)
         self.request['session'].add(new_adv)
         await self.request['session'].commit()
@@ -35,19 +32,13 @@ class AdvView(web.View):
 
     async def patch(self):
 
-        print('\n___adv_patch_____\n')
-
         await check_auth(self.request)
 
         adv_data = await self.request.json()
 
-        print(f'adv_data: {adv_data}')
-
         query = select(AdvModel).where(AdvModel.title == adv_data["title"])
         result = await self.request["session"].execute(query)
         adv = result.scalar()
-
-        print(f'adv.user_id: {adv.user_id}')
 
         if not adv:
             raise raise_error(web.HTTPUnauthorized,
@@ -64,16 +55,12 @@ class AdvView(web.View):
         return web.json_response({"status": "success"})
 
     async def delete(self):
-        print('\n___adv_delete_____\n')
         await check_auth(self.request)
 
         adv_id = int(self.request.match_info['adv_id'])
-
         adv = await get_orm_item(AdvModel, adv_id, self.request['session'])
 
-        print(f'adv.user_id: {adv.user_id}')
         await check_owner(self.request, adv.user_id)
-
         await self.request['session'].delete(adv)
         await self.request['session'].commit()
 

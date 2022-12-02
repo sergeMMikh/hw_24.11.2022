@@ -77,3 +77,16 @@ def create_adv(token: str, title: str, description: str):
 def get_adv(adv_id):
     return basic_request('get',
                          f'adv/{adv_id}')
+
+
+def patch_adv(token: str, patch: dict):
+    return basic_request('patch', 'adv',
+                         headers={'token': token},
+                         json=patch)
+
+
+def delete_adv(adv_id: int, token: str):
+    return basic_request('delete',
+                         f'adv/{adv_id}',
+                         headers={'token': token})
+
