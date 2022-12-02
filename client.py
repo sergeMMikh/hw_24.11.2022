@@ -73,7 +73,7 @@ pprint(data.text)
 
 print('\n___adv_patch_____\n')
 
-adv_id = json.loads(data.text).get('id')
+# adv_id = json.loads(data.text).get('id')
 
 data = requests.patch('http://127.0.0.1:8080/adv',
                       headers={'token': token},
@@ -81,6 +81,15 @@ data = requests.patch('http://127.0.0.1:8080/adv',
                           'title': title,
                           'description': 'This is a new description for old title.'
                       })
+
+print(data.status_code)
+print('requests:')
+pprint(data.text)
+
+print('\n___adv_delete_____\n')
+print(f'adv_id: {adv_id}')
+data = requests.delete(f'http://127.0.0.1:8080/adv/{adv_id}',
+                       headers={'token': token})
 
 print(data.status_code)
 print('requests:')

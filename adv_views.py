@@ -47,14 +47,34 @@ class AdvView(web.View):
         result = await self.request["session"].execute(query)
         adv = result.scalar()
 
-        if not adv or not check_owner(self.request, adv.user_id):
+        print(f'adv.user_id: {adv.user_id}')
+
+        if not adv:
             raise raise_error(web.HTTPUnauthorized,
-                              message="The title is incorrect or you don't have rights to make this changes.")
+                              message="The title is incorrect.")
+
+        await check_owner(self.request, adv.user_id)
 
         for field, value in adv_data.items():
             setattr(adv, field, value)
 
         self.request['session'].add(adv)
+        await self.request['session'].commit()
+
+        return web.json_response({"status": "success"})
+
+    async def delete(self):
+        print('\n___adv_delete_____\n')
+        await check_auth(self.request)
+
+        adv_id = int(self.request.match_info['adv_id'])
+
+        adv = await get_orm_item(AdvModel, adv_id, self.request['session'])
+
+        print(f'adv.user_id: {adv.user_id}')
+        await check_owner(self.request, adv.user_id)
+
+        await self.request['session'].delete(adv)
         await self.request['session'].commit()
 
         return web.json_response({"status": "success"})

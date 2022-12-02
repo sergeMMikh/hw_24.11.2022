@@ -49,4 +49,5 @@ class UsersView(web.View):
         user = await get_orm_item(User, user_id, self.request['session'])
         await self.request['session'].delete(user)
         await self.request['session'].commit()
+
         return web.json_response({"status": "success"})

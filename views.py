@@ -43,6 +43,7 @@ async def check_auth(request: web.Request):
 async def check_owner(request: web.Request, owner_id: int):
     if request['token'].user_id != owner_id:
         raise_error(web.HTTPForbidden, message='token is incorrect')
+    print('Owner is correct.')
 
 
 async def get_user(request: web.Request):
