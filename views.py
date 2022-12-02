@@ -45,7 +45,7 @@ async def check_owner(request: web.Request, owner_id: int):
         raise_error(web.HTTPForbidden, message='token is incorrect')
 
 
-def get_user(request: web.Request):
+async def get_user(request: web.Request):
     return request['token'].user_id
 
 

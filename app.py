@@ -17,6 +17,6 @@ app.add_routes([
 
     web.post('/adv', AdvView),
     web.get('/adv/{adv_id:\d+}', AdvView),
-    # web.patch('/adv/{user_id:\d+}', AdvView),
+    web.patch('/adv', AdvView),
     # web.delete('/adv/{user_id:\d+}', AdvView),
 ])
